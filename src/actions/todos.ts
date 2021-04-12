@@ -14,6 +14,15 @@ export interface FetchTodosAction {
     payload: Todo[]
 }
 
+export interface ClearTodosAction {
+    type: ActionTypes.clearTodos
+}
+
+export interface DeleteTodoAction {
+    type: ActionTypes.deleteTodo;
+    payload: number
+}
+
 const url = 'https://jsonplaceholder.typicode.com/todos'
 export const fetchTodos = () => {
     return async(dispatch: Dispatch) => {
@@ -21,6 +30,23 @@ export const fetchTodos = () => {
         dispatch<FetchTodosAction>({
             type: ActionTypes.fetchTodos,
             payload: response.data
+        })
+    }
+}
+
+export const clearTodos = () => {
+    return (dispatch: Dispatch) => {
+        dispatch<ClearTodosAction>({
+            type: ActionTypes.clearTodos
+        })
+    }
+}
+
+export const deleteTodo = (todoId: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch<DeleteTodoAction>({
+            type: ActionTypes.deleteTodo,
+            payload: todoId
         })
     }
 }
